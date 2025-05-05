@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+.hero-section {
+    background-image: url('./assets/hero-banner.png');
+    background-size: cover;
+    background-position: center;
+  }
