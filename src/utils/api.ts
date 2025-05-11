@@ -10,3 +10,17 @@ export const login = async (token?: string) => {
     token,
   });
 };
+
+export const createStoryApi = async (data: any, token: string) => {
+  return await api.post(
+    '/story/create',
+    {
+      ...data,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};

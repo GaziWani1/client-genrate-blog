@@ -1,10 +1,12 @@
 import BannerImage from '../assets/hero-banner.png';
-import Button from '../components/Button';
+
 import image2 from '../assets/secondsectionpic.jpeg';
 import image3 from '../assets/image3.jpeg';
+import Navbar from '../components/Navbar';
 const Home = () => {
   return (
     <>
+      <Navbar />
       <section className="w-full flex justify-center items-center min-h-[610px]">
         <div className="w-full  min-h-[600px] relative overflow-hidden">
           {/* Banner Image */}
@@ -26,9 +28,6 @@ const Home = () => {
               <span className="bg-red-700 px-2 py-1">Youtube Shorts</span>{' '}
               <br /> And Other Social Media Apps
             </p>
-            <Button className="  bg-blue-400 rounded-4xl text-xl py-3 px-10 ">
-              Get Started
-            </Button>
           </div>
         </div>
       </section>
