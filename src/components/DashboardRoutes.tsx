@@ -4,8 +4,10 @@ import { Route, Routes } from 'react-router-dom';
 import SideBar from './SideBar';
 import DashboardNavbar from './DashboardNavbar';
 import Create from '../pages/Create';
+import { useAuth } from '../Context/AuthContext';
 
 const DashboardRoutes = () => {
+  const { user } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {

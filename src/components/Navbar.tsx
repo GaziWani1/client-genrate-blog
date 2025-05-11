@@ -23,7 +23,7 @@ const Navbar = () => {
   });
 
   return (
-    <section className="flex justify-between bg-white py-2 px-6 shadow sm:px-20">
+    <section className="flex justify-between bg-white py-3 px-6 shadow sm:px-20">
       <h1 className="text-black font-semibold text-2xl">
         <Link to="/" className="text-red-500 font-serif">
           Story <span className="text-blue-500">Gen</span>
