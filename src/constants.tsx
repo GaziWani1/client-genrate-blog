@@ -7,8 +7,8 @@ export const SideBarItems = [
     icon: PlusCircle,
   },
   {
-    title: 'Your Stories',
-    link: '/dashboard/stories',
+    title: 'Your Blogs',
+    link: '/dashboard/blogs',
     icon: GalleryHorizontal,
   },
   {

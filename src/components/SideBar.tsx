@@ -1,6 +1,8 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { LogOut, X } from 'lucide-react';
 import { SideBarItems } from '../constants';
+import { googleLogout } from '@react-oauth/google';
+import { useAuth } from '../Context/AuthContext';
 
 const Sidebar = ({
   collapsed,
@@ -10,6 +12,8 @@ const Sidebar = ({
   toggleSidebar: () => void;
 }) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const renderNavLinks = () =>
     SideBarItems.map(({ title, link, icon: IconComponent }) => {
@@ -39,7 +43,14 @@ const Sidebar = ({
     });
 
   const renderLogout = () => (
-    <button className="flex items-center gap-3 p-3 bg-red-400 hover:bg-red-300 transition-colors rounded text-gray-100 w-full">
+    <button
+      onClick={() => {
+        googleLogout();
+        logout();
+        navigate('/');
+      }}
+      className="flex items-center gap-3 p-3 bg-red-400 hover:bg-red-300 transition-colors rounded text-gray-100 w-full"
+    >
       <LogOut size={20} />
       {!collapsed && (
         <span className="text-sm font-medium whitespace-nowrap">Logout</span>
@@ -51,15 +62,15 @@ const Sidebar = ({
     <>
       {/* Desktop sidebar */}
       <aside
-        className={`hidden sm:flex h-screen border-r border-sky-100 flex-col justify-between  text-gray-700 w-${
+        className={`hidden sm:flex h-screen bg-neutral-100 flex-col justify-between  text-gray-700 w-${
           collapsed ? '16' : '64'
         } transition-all duration-300`}
       >
         <div>
-          <div className="flex items-center justify-center h-auto py-4 px-4">
+          <div className="flex items-center justify-center h-20 py-4 px-4">
             {!collapsed && (
               <h1 className="font-semibold text-xl text-red-500 font-serif">
-                Story <span className="text-blue-500">Gen</span>
+                Blog <span className="text-blue-500">Gen</span>
                 <span className="text-slate-600">.Ai</span>
               </h1>
             )}
@@ -79,7 +90,7 @@ const Sidebar = ({
           <div className="flex items-center justify-between px-4 py-4">
             {!collapsed && (
               <h1 className="font-semibold text-2xl text-red-500 font-serif">
-                Story <span className="text-blue-500">Gen</span>
+                Blog <span className="text-blue-500">Gen</span>
                 <span className="text-slate-600">.Ai</span>
               </h1>
             )}

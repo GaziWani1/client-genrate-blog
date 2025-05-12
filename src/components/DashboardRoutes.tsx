@@ -5,6 +5,7 @@ import SideBar from './SideBar';
 import DashboardNavbar from './DashboardNavbar';
 import Create from '../pages/Create';
 import { useAuth } from '../Context/AuthContext';
+import UserBlogs from '../pages/UserBlogs';
 
 const DashboardRoutes = () => {
   const { user } = useAuth();
@@ -23,6 +24,7 @@ const DashboardRoutes = () => {
           <main className=" flex-1 h-[90vh] overflow-auto bg-white px-3 sm:px-6 ">
             <Routes>
               <Route index element={<Create />} />
+              <Route path="/blogs" element={<UserBlogs />} />
             </Routes>
           </main>
         </div>

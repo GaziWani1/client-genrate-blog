@@ -13,7 +13,7 @@ export const login = async (token?: string) => {
 
 export const createStoryApi = async (data: any, token: string) => {
   return await api.post(
-    '/story/create',
+    '/blog/create',
     {
       ...data,
     },
@@ -23,4 +23,28 @@ export const createStoryApi = async (data: any, token: string) => {
       },
     }
   );
+};
+
+export const getBlogs = async (
+  token: string,
+  search: string = '',
+  page: number,
+  pageLimit: number = 8
+) => {
+  return await api.get(
+    `/blog/user-blogs?search=${search}&page=${page}&pageLimit=${pageLimit}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+export const deleteBlog = async (id: string, token: string) => {
+  return await api.delete(`/blog/user-blog/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };

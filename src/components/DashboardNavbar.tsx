@@ -5,7 +5,7 @@ const DashboardNavbar = ({ toggleSidebar }: { toggleSidebar: any }) => {
   const { user } = useAuth();
 
   return (
-    <div className="w-full flex justify-center items-center ">
+    <div className="w-full flex justify-center bg-neutral-100  items-center  px-3">
       <div className=" w-full py-3 px-3 ">
         <div className="flex flex-row sm:items-center justify-between gap-4">
           {/* Left: Sidebar toggle */}
