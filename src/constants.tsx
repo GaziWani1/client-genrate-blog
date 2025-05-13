@@ -1,4 +1,4 @@
-import { PlusCircle, GalleryHorizontal, Paperclip } from 'lucide-react';
+import { PlusCircle, GalleryHorizontal, Receipt } from 'lucide-react';
 
 export const SideBarItems = [
   {
@@ -14,6 +14,6 @@ export const SideBarItems = [
   {
     title: 'Billing',
     link: '/dashboard/billing',
-    icon: Paperclip,
+    icon: Receipt,
   },
 ];

@@ -23,26 +23,26 @@ const Navbar = () => {
   });
 
   return (
-    <section className="flex justify-between bg-white py-3 px-6 shadow sm:px-20">
-      <h1 className="text-black font-semibold text-2xl">
+    <section className="flex items-center justify-between bg-white py-3 px-6 shadow sm:px-20">
+      <h1 className="text-black font-semibold text-xl sm:text-2xl">
         <Link to="/" className="text-red-500 font-serif">
           Blog <span className="text-blue-500">Gen</span>
           <span className="text-slate-600">.Ai</span>
         </Link>
       </h1>
 
-      <nav className="flex gap-5 items-center">
+      <nav className="flex gap-2 sm:gap-5  text-sm items-center">
         {user ? (
           <>
             <Button
               onClick={() => {
                 navigate('/dashboard');
               }}
-              className=" bg-red-400 px-2 py-[8px] text-sm rounded-full"
+              className=" bg-red-400 text-xs  sm:text-sm sm:px-4 sm:py-[8px] rounded-full"
             >
               Create
             </Button>
-            <span className="text-sm font-semibold text-gray-700 ">
+            <span className=" text-sm font-semibold text-gray-700 ">
               Welcome, {user.name}
             </span>
           </>

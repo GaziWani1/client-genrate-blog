@@ -48,3 +48,38 @@ export const deleteBlog = async (id: string, token: string) => {
     },
   });
 };
+
+export const getBlog = async (id: string) => {
+  return await api.get(`/blog/user-blog/${id}`);
+};
+
+export const getCredit = async (token: string) => {
+  return await api.get(`/users/credits`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const getAllBogs = async (
+  search: string = '',
+  page: number,
+  pageLimit: number
+) => {
+  return await api.get(
+    `/blog/get-all-blogs?search=${search}&page=${page}&pageLimit=${pageLimit}`
+  );
+};
+
+export const likeBlog = async (id: string, like: boolean, token: string) => {
+  const response = await api.patch(
+    `/blog/like-blog/${id}?like=${like ? 1 : 0}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};

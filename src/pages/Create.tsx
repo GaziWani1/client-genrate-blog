@@ -4,11 +4,11 @@ import { createStoryApi } from '../utils/api';
 import { useAuth } from '../Context/AuthContext';
 import Input from '../components/Input';
 import Select from '../components/Select';
-import ReactMarkdown from 'react-markdown';
 import { Copy } from 'lucide-react';
 import toast from 'react-hot-toast';
+import MarkDownComponent from '../components/MarkDownComponent';
 
-const Create = () => {
+const Create = ({ setCredits }: { setCredits: any }) => {
   const { token }: { token: any } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -23,10 +23,10 @@ const Create = () => {
   const { mutate, isPending, isError, isSuccess, error, data } = useMutation({
     mutationFn: async (formData) => {
       const res = await createStoryApi(formData, token);
-      console.log(res.data.data);
+      setCredits((prev: number) => prev - 3);
       return res.data.data;
     },
-    mutationKey: ['blogs'],
+    mutationKey: ['blogs', 'credits'],
   });
 
   const handleChange = (
@@ -48,8 +48,11 @@ const Create = () => {
 
   return (
     <section className="flex shadow rounded mt-3 justify-center flex-col w-full p-4">
+      <h1 className="my-4 flex text-3xl text-gray-600 py-2 border-b border-gray-300 font-semibold">
+        Generate Blog By Using AI{' '}
+      </h1>
       <form
-        className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 w-full"
+        className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 w-full"
         onSubmit={handleSubmit}
       >
         <Input
@@ -94,12 +97,17 @@ const Create = () => {
             required
           />
         </div>
+        <span className="  text-sm text-black">3 Credits / Blog</span>
 
         <div className="sm:col-span-2 md:col-span-4">
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            disabled={isPending}
+            className={`${
+              isError
+                ? 'bg-gray-200 text-black cursor-not-allowed'
+                : 'bg-blue-600'
+            } text-white px-4 py-2 rounded`}
+            disabled={isPending || isError}
           >
             {isPending ? 'Generating Blog...' : 'Create Blog'}
           </button>
@@ -107,7 +115,7 @@ const Create = () => {
 
         {isError && (
           <div className="sm:col-span-4 text-red-600 text-center">
-            Error: {error.message}
+            {error?.response?.data?.error}
           </div>
         )}
         {isSuccess && (
@@ -120,88 +128,7 @@ const Create = () => {
               className="text-black self-end border p-2 cursor-pointer rounded size-9"
             />
 
-            <ReactMarkdown
-              components={{
-                h1: ({ node, ...props }) => (
-                  <h1
-                    className="text-3xl font-bold text-gray-800 mb-4"
-                    {...props}
-                  />
-                ),
-                h2: ({ node, ...props }) => (
-                  <h2
-                    className="text-2xl font-semibold text-gray-800 mb-3"
-                    {...props}
-                  />
-                ),
-                h3: ({ node, ...props }) => (
-                  <h3
-                    className="text-xl font-semibold text-gray-700 mb-2"
-                    {...props}
-                  />
-                ),
-                h4: ({ node, ...props }) => (
-                  <h4
-                    className="text-lg font-medium text-gray-700 mb-2"
-                    {...props}
-                  />
-                ),
-                p: ({ node, ...props }) => (
-                  <p
-                    className="text-base text-gray-700 leading-relaxed mb-4"
-                    {...props}
-                  />
-                ),
-                ul: ({ node, ...props }) => (
-                  <ul
-                    className="list-disc list-inside text-gray-700 mb-4"
-                    {...props}
-                  />
-                ),
-                ol: ({ node, ...props }) => (
-                  <ol
-                    className="list-decimal list-inside text-gray-700 mb-4"
-                    {...props}
-                  />
-                ),
-                li: ({ node, ...props }) => (
-                  <li className="mb-1 ml-4" {...props} />
-                ),
-                blockquote: ({ node, ...props }) => (
-                  <blockquote
-                    className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-4"
-                    {...props}
-                  />
-                ),
-                code: ({ node, ...props }) => (
-                  <code
-                    className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono text-gray-800"
-                    {...props}
-                  />
-                ),
-                pre: ({ node, ...props }) => (
-                  <pre
-                    className="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto my-4"
-                    {...props}
-                  />
-                ),
-                a: ({ node, ...props }) => (
-                  <a className="text-blue-600 hover:underline" {...props} />
-                ),
-                img: ({ node, ...props }) => (
-                  <img className="my-4 rounded-lg max-w-full" {...props} />
-                ),
-                strong: ({ node, ...props }) => (
-                  <strong className="font-semibold text-gray-800" {...props} />
-                ),
-                em: ({ node, ...props }) => (
-                  <em className="italic text-gray-700" {...props} />
-                ),
-                hr: () => <hr className="my-6 border-gray-300" />,
-              }}
-            >
-              {data?.blog}
-            </ReactMarkdown>
+            <MarkDownComponent blog={data?.blog} />
           </div>
         )}
       </form>

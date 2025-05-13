@@ -33,6 +33,8 @@ const UserBlogs = () => {
     setSearch('');
   };
 
+  console.log(isLoading);
+
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
@@ -77,7 +79,7 @@ const UserBlogs = () => {
         {isError && <p>Error: {(error as any)?.message}</p>}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {blogs?.map((e: any) => (
-            <BlogCard key={e.id} data={e} />
+            <BlogCard key={e.id} data={e} home={false} />
           ))}
         </div>
 

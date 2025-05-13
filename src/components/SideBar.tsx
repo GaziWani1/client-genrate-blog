@@ -68,7 +68,11 @@ const Sidebar = ({
       >
         <div>
           <div className="flex items-center justify-center h-20 py-4 px-4">
-            {!collapsed && (
+            {collapsed ? (
+              <h1 className="font-semibold text-sm text-red-500 font-serif">
+                Blog
+              </h1>
+            ) : (
               <h1 className="font-semibold text-xl text-red-500 font-serif">
                 Blog <span className="text-blue-500">Gen</span>
                 <span className="text-slate-600">.Ai</span>
@@ -88,8 +92,12 @@ const Sidebar = ({
       >
         <div>
           <div className="flex items-center justify-between px-4 py-4">
-            {!collapsed && (
-              <h1 className="font-semibold text-2xl text-red-500 font-serif">
+            {collapsed ? (
+              <h1 className="font-semibold text-sm text-red-500 font-serif">
+                Blog
+              </h1>
+            ) : (
+              <h1 className="font-semibold text-xl text-red-500 font-serif">
                 Blog <span className="text-blue-500">Gen</span>
                 <span className="text-slate-600">.Ai</span>
               </h1>
