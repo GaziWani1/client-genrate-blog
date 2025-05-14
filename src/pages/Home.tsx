@@ -54,15 +54,15 @@ const Home = () => {
         />
         <div className="relative z-10 flex flex-col items-center justify-center h-full bg-[#00000089] text-center px-4">
           <h1 className="text-white text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-md">
-            Generate Blogs With AI
+            Create 1-Minute Blogs Instantly with AI
           </h1>
           <p className="my-4 text-white text-lg md:text-xl font-medium max-w-3xl drop-shadow-sm">
-            Generate Engaging{' '}
-            <span className="bg-red-700 px-2 py-1 rounded">Blog Posts</span> for{' '}
-            <span className="bg-red-400 px-2 py-1 rounded">Websites</span>,{' '}
-            <span className="bg-red-700 px-2 py-1 rounded">Newsletters</span>{' '}
-            <br />
-            and other Content Platforms
+            Turn your ideas into{' '}
+            <span className="bg-red-700 px-2 py-1 rounded">quick-read</span>{' '}
+            blogs for{' '}
+            <span className="bg-red-400 px-2 py-1 rounded">websites</span>,
+            <span className="bg-red-700 px-2 py-1 rounded">newsletters</span>,
+            and more — all in under a minute.
           </p>
           <div className="flex items-center w-full mx-auto sm:w-[500px] bg-white p-2 gap-2 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-shadow">
             <input
@@ -131,8 +131,17 @@ const Home = () => {
           © {new Date().getFullYear()} Blog Gen.Ai. All rights reserved.
         </p>
       </div>
-      {/* Welcome Section */}
-      {/* <section className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8 items-center px-4 sm:px-20 py-12 bg-gray-50">
+    </>
+  );
+};
+
+export default Home;
+
+{
+  /* Welcome Section */
+}
+{
+  /* <section className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8 items-center px-4 sm:px-20 py-12 bg-gray-50">
         <div className="space-y-5">
           <h2 className="text-3xl font-bold text-gray-800">
             ✍️ Welcome to Blog Gen AI
@@ -151,10 +160,14 @@ const Home = () => {
             className="w-full rounded-xl shadow-md"
           />
         </div>
-      </section> */}
+      </section> */
+}
 
-      {/* Features Section */}
-      {/* <section className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8 items-center px-4 sm:px-20 py-12">
+{
+  /* Features Section */
+}
+{
+  /* <section className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8 items-center px-4 sm:px-20 py-12">
         <div className="hidden sm:block">
           <img
             src={image3}
@@ -174,9 +187,5 @@ const Home = () => {
             <li>Save drafts, edit, and publish content on the go</li>
           </ul>
         </div>
-      </section> */}
-    </>
-  );
-};
-
-export default Home;
+      </section> */
+}

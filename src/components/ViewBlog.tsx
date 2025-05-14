@@ -1,8 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import ReactMarkdown from 'react-markdown';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeftCircle, Heart, SplinePointer } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Navbar from './Navbar';
 import Button from './Button';
@@ -19,12 +18,20 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
   const { id } = useParams<{ id: string }>();
   const [liked, setLiked] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['blog', id],
     queryFn: () => getBlog(id!),
     enabled: !!id,
   });
+
+  useEffect(() => {
+    if (data?.data?.blog && user?._id) {
+      const isLiked = data.data.blog.likedBy.includes(user._id);
+      setLiked(isLiked);
+    }
+  }, [data, user]);
 
   const {
     mutate: likeMutate,
@@ -33,17 +40,16 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
     error: likeError,
   } = useMutation({
     mutationFn: () => likeBlog(id!, !liked, token!),
-    onError: (err: any) => {
-      if (err?.response?.data?.message === 'unathorized') {
-        setShowDialog(true);
-      }
+    onSuccess: () => {
+      setLiked((prev) => !prev);
+      queryClient.invalidateQueries({ queryKey: ['blogs'] });
+    },
+    onError: () => {
+      setShowDialog(true);
     },
   });
 
   const blog = data?.data?.blog;
-  const isLiked = data?.data?.blog.likedBy.includes(user._id);
-
-  console.log(blog?.likedBy);
 
   return (
     <>
@@ -56,6 +62,7 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
       )}
 
       {isError && <div>Error: {(error as Error).message}</div>}
+
       <section
         className={`w-full ${isDashboard ? 'py-3' : 'px-2 my-3 sm:px-24'}`}
       >
@@ -75,13 +82,16 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
           {!isDashboard && (
             <Button
               onClick={() => {
-                setLiked(!liked);
+                if (!token || !user) {
+                  setShowDialog(true);
+                  return;
+                }
                 likeMutate();
               }}
               className="bg-red-400 self-end"
               disabled={isLiking}
             >
-              <Heart className={`${liked || isLiked ? 'fill-white' : ''}`} />
+              <Heart className={`${liked ? 'fill-white' : ''}`} />
             </Button>
           )}
         </div>
@@ -90,6 +100,7 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
       <section className={`${isDashboard ? 'p-3' : 'sm:px-24 px-3'}`}>
         <MarkDownComponent blog={blog?.blog} />
       </section>
+
       {showDialog && (
         <div className="fixed inset-0 bg-[#fefefe89] bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full relative">

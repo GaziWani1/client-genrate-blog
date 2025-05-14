@@ -13,7 +13,7 @@ const Create = ({ setCredits }: { setCredits: any }) => {
 
   const [formData, setFormData] = useState({
     blogType: '',
-    readingTime: '',
+    readingTime: 1,
     timeUnit: 'minute',
     blogAbout: '',
   });
@@ -46,6 +46,8 @@ const Create = ({ setCredits }: { setCredits: any }) => {
     mutate(formData);
   };
 
+  console.log(error);
+
   return (
     <section className="flex shadow rounded mt-3 justify-center flex-col w-full p-4">
       <h1 className="my-4 flex text-3xl text-gray-600 py-2 border-b border-gray-300 font-semibold">
@@ -70,8 +72,8 @@ const Create = ({ setCredits }: { setCredits: any }) => {
           name="readingTime"
           placeholder="e.g., 5"
           value={formData.readingTime}
-          onChange={handleChange}
           required
+          disabled
         />
 
         <Select
@@ -81,6 +83,7 @@ const Create = ({ setCredits }: { setCredits: any }) => {
           options={timeUnitOptions}
           name="timeUnit"
           required
+          disabled
         />
 
         <div className="sm:col-span-2 md:col-span-4">
