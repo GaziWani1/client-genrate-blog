@@ -93,7 +93,7 @@ const Home = () => {
         <h2 className="text-3xl font-bold text-gray-800 my-8">
           📝 Suggested Blogs You May Like
         </h2>
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <p className="my-10">Loading...</p>}
         {isError && <p>Error: {(error as any)?.message}</p>}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {blogs?.map((e: any) => (
