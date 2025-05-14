@@ -1,6 +1,5 @@
 import BannerImage from '../assets/hero-banner.png';
-import image2 from '../assets/secondsectionpic.jpeg';
-import image3 from '../assets/image3.jpeg';
+
 import Navbar from '../components/Navbar';
 import { useEffect, useState } from 'react';
 import { Search, X } from 'lucide-react';
