@@ -33,8 +33,6 @@ const UserBlogs = () => {
     setSearch('');
   };
 
-  console.log(isLoading);
-
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };

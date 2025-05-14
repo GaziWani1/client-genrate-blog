@@ -41,7 +41,7 @@ const DashboardRoutes = () => {
         <main className="flex-1 h-[90vh] overflow-auto bg-white px-3 sm:px-6">
           <Routes>
             <Route index element={<Create setCredits={setCredits} />} />
-            <Route path="/blogs" element={<UserBlogs />} />
+            <Route path="/user/blogs" element={<UserBlogs />} />
             <Route
               path="/blogs/view/:id"
               element={<ViewBlog isDashboard={true} />}

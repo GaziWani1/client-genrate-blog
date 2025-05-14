@@ -8,7 +8,7 @@ export const SideBarItems = [
   },
   {
     title: 'Your Blogs',
-    link: '/dashboard/blogs',
+    link: '/dashboard/user/blogs',
     icon: GalleryHorizontal,
   },
   {
