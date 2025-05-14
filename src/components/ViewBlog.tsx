@@ -1,6 +1,12 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeftCircle, Heart, SplinePointer } from 'lucide-react';
+import {
+  ArrowLeftCircle,
+  Construction,
+  Heart,
+  Loader2,
+  SplinePointer,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import Navbar from './Navbar';
@@ -19,6 +25,12 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
   const [liked, setLiked] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const queryClient = useQueryClient();
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['blog', id],
@@ -42,7 +54,7 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
     mutationFn: () => likeBlog(id!, !liked, token!),
     onSuccess: () => {
       setLiked((prev) => !prev);
-      queryClient.invalidateQueries({ queryKey: ['blogs'] });
+      queryClient.invalidateQueries({ queryKey: ['userblogs', 'blogs'] });
     },
     onError: () => {
       setShowDialog(true);
@@ -91,7 +103,11 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
               className="bg-red-400 self-end"
               disabled={isLiking}
             >
-              <Heart className={`${liked ? 'fill-white' : ''}`} />
+              {isLiking ? (
+                <Loader2 className=" animate-spin " />
+              ) : (
+                <Heart className={`${liked ? 'fill-white' : ''}`} />
+              )}
             </Button>
           )}
         </div>

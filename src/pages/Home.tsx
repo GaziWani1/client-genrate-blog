@@ -22,7 +22,7 @@ const Home = () => {
   }, [search]);
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['blogs', debouncedSearch, currentPage],
+    queryKey: ['userblogs', debouncedSearch, currentPage],
     queryFn: () => getAllBogs(debouncedSearch, currentPage, 9),
   });
 
