@@ -37,7 +37,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ data, home = false }) => {
     },
   });
 
-  const linkPrefix = home ? '/blogs/view/' : '/dashboard/blogs/view/';
+  const linkPrefix = home ? '/blogs/view/' : '/dashboard/user/blogs/view/';
 
   return (
     <div className="relative group rounded overflow-hidden p-2 bg-slate-100">

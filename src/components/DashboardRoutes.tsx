@@ -43,10 +43,10 @@ const DashboardRoutes = () => {
             <Route index element={<Create setCredits={setCredits} />} />
             <Route path="/user/blogs" element={<UserBlogs />} />
             <Route
-              path="/blogs/view/:id"
+              path="/user/blogs/view/:id"
               element={<ViewBlog isDashboard={true} />}
             />
-            <Route path="/billing" element={<Billing />} />
+            <Route path="/user/billing" element={<Billing />} />
           </Routes>
         </main>
       </div>

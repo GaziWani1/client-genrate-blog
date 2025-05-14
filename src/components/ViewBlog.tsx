@@ -69,7 +69,7 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
         <div className="flex gap-4 items-center w-full justify-between bg-white">
           <div className="flex gap-3 sm:gap-8 justify-between items-center">
             <Link
-              to={isDashboard ? '/dashboard/blogs' : '/'}
+              to={isDashboard ? '/dashboard/user/blogs' : '/'}
               className="bg-gray-100 p-2 rounded"
             >
               <ArrowLeftCircle className="text-gray-500 size-9" />

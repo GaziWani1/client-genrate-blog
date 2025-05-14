@@ -13,7 +13,7 @@ export const SideBarItems = [
   },
   {
     title: 'Billing',
-    link: '/dashboard/billing',
+    link: '/dashboard/user/billing',
     icon: Receipt,
   },
 ];

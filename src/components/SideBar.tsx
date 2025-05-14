@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LogOut, X } from 'lucide-react';
+import { ClockFading, LogOut, X } from 'lucide-react';
 import { SideBarItems } from '../constants';
 import { googleLogout } from '@react-oauth/google';
 import { useAuth } from '../Context/AuthContext';
@@ -17,8 +17,12 @@ const Sidebar = ({
 
   const renderNavLinks = () =>
     SideBarItems.map(({ title, link, icon: IconComponent }) => {
-      const isActive = location.pathname === link;
+      const isActive =
+        link === '/dashboard'
+          ? location.pathname === '/dashboard'
+          : location.pathname.includes(link.split('/')[3]);
 
+      console.log(link.split('/').length);
       return (
         <Link
           key={link}
