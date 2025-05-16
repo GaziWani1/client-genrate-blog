@@ -22,7 +22,6 @@ const Sidebar = ({
           ? location.pathname === '/dashboard'
           : location.pathname.includes(link.split('/')[3]);
 
-      console.log(link.split('/').length);
       return (
         <Link
           key={link}

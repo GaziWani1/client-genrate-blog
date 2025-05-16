@@ -1,9 +1,8 @@
 import axios from 'axios';
-// const API_URL = import.meta.env.VITE_LOCAL_BACKEND_URL;
-const API_URL =
-  import.meta.env.VITE_SERVER_BACKEND_URL ||
-  'https://server-generate-blog-ai.onrender.com/api/v1/';
-console.log(API_URL);
+const API_URL = import.meta.env.VITE_LOCAL_BACKEND_URL;
+// const API_URL =
+//   import.meta.env.VITE_SERVER_BACKEND_URL ||
+//   'https://server-generate-blog-ai.onrender.com/api/v1/';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -85,5 +84,17 @@ export const likeBlog = async (id: string, like: boolean, token: string) => {
       },
     }
   );
+  return response.data;
+};
+
+export const getSubsriptions = async () => {
+  const response = await api.get('/subscription/get-subs');
+  return response.data;
+};
+
+export const subscribe = async (id: string) => {
+  const response = await api.post('/subscription/user-subscription', {
+    priceId: id,
+  });
   return response.data;
 };
