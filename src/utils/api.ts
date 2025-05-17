@@ -92,9 +92,26 @@ export const getSubsriptions = async () => {
   return response.data;
 };
 
-export const subscribe = async (id: string) => {
-  const response = await api.post('/subscription/user-subscription', {
-    priceId: id,
+export const subscribe = async (token: string, id: string) => {
+  const response = await api.post(
+    '/subscription/user-subscription',
+    {
+      priceId: id,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const getUserSubsriptions = async (token: string) => {
+  const response = await api.get('/subscription/user-subscription', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response.data;
 };
