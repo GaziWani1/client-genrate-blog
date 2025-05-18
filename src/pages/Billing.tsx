@@ -73,7 +73,8 @@ const Billing = () => {
 
   return (
     <section className="py-10 px-4 sm:px-10">
-      <div className="max-w-5xl mx-auto">
+      <h1>Comming soon</h1>
+      {/* <div className="max-w-5xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-800 mb-6">Billing Plans</h1>
         <p className="text-gray-600 text-lg mb-10">
           Choose the plan that best fits your needs. Upgrade anytime.
@@ -88,7 +89,6 @@ const Billing = () => {
         )}
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Free Plan */}
           <div className="bg-white p-6 rounded-2xl border shadow-sm hover:shadow-md transition">
             <h2 className="text-xl font-semibold text-gray-800">Free Plan</h2>
             <p className="text-gray-600 mt-2">12 credits / day</p>
@@ -100,7 +100,6 @@ const Billing = () => {
             </Button>
           </div>
 
-          {/* Dynamic Plans */}
           {allPlans?.data?.map((subs: SubscriptionPlan) => (
             <div
               key={subs._id}
@@ -133,7 +132,7 @@ const Billing = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
