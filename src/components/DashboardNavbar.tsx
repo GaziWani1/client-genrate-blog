@@ -20,12 +20,12 @@ const DashboardNavbar = ({
           </div>
 
           <div className="flexitems-center justify-end flex-row  gap-2 sm:gap-4 text-center sm:text-right ">
-            <h1 className="text-primary gap-2 flex items-center font-semibold mx-auto text-sm sm:text-base">
+            <div className="text-primary gap-2 flex items-center font-semibold mx-auto text-sm sm:text-base">
               <h1 className="flex text-gray-50 gap-1 justify-between items-center bg-gray-400 p-1 rounded">
                 <CoinsIcon /> {credits}
               </h1>
               Hey, {user?.name}
-            </h1>
+            </div>
           </div>
         </div>
       </div>
