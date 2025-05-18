@@ -11,9 +11,9 @@ export const SideBarItems = [
     link: '/dashboard/user/blogs',
     icon: GalleryHorizontal,
   },
-  {
-    title: 'Billing',
-    link: '/dashboard/user/billing',
-    icon: Receipt,
-  },
+  // {
+  //   title: 'Billing',
+  //   link: '/dashboard/user/billing',
+  //   icon: Receipt,
+  // },
 ];
