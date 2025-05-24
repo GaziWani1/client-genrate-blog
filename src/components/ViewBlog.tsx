@@ -5,6 +5,7 @@ import {
   Construction,
   Heart,
   Loader2,
+  Loader2Icon,
   SplinePointer,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -69,51 +70,53 @@ const ViewBlog = ({ isDashboard = false }: ViewBlogProps) => {
 
       {isLoading && (
         <div className="flex h-screen w-full justify-center items-center">
-          <SplinePointer className="animate-pulse size-12" />
+          <Loader2Icon className="animate-spin size-12" />
         </div>
       )}
 
       {isError && <div>Error: {(error as Error).message}</div>}
 
-      <section
-        className={`w-full ${isDashboard ? 'py-3' : 'px-2 my-3 sm:px-24'}`}
-      >
-        <div className="flex gap-4 items-center w-full justify-between bg-white">
-          <div className="flex gap-3 sm:gap-8 justify-between items-center">
-            <Link
-              to={isDashboard ? '/dashboard/user/blogs' : '/'}
-              className="bg-gray-100 p-2 rounded"
-            >
-              <ArrowLeftCircle className="text-gray-500 size-9" />
-            </Link>
-            <h1 className="px-3 text-3xl text-sky-600 underline">
-              {blog?.title}
-            </h1>
+      {!isLoading && (
+        <section
+          className={`w-full ${isDashboard ? 'py-3' : 'px-2 my-3 sm:px-24'}`}
+        >
+          <div className="flex gap-4 items-center w-full justify-between bg-white">
+            <div className="flex gap-3 sm:gap-8 justify-between items-center">
+              <Link
+                to={isDashboard ? '/dashboard/user/blogs' : '/'}
+                className="bg-gray-100 p-2 rounded"
+              >
+                <ArrowLeftCircle className="text-gray-500 size-9" />
+              </Link>
+              <h1 className="px-3 text-3xl text-sky-600 underline">
+                {blog?.title}
+              </h1>
+            </div>
+
+            {!isDashboard && (
+              <Button
+                onClick={() => {
+                  if (!token || !user) {
+                    setShowDialog(true);
+                    return;
+                  }
+                  likeMutate();
+                }}
+                className="bg-red-400 self-end"
+                disabled={isLiking}
+              >
+                {isLiking ? (
+                  <Loader2 className=" animate-spin " />
+                ) : (
+                  <Heart className={`${liked ? 'fill-white' : ''}`} />
+                )}
+              </Button>
+            )}
           </div>
+        </section>
+      )}
 
-          {!isDashboard && (
-            <Button
-              onClick={() => {
-                if (!token || !user) {
-                  setShowDialog(true);
-                  return;
-                }
-                likeMutate();
-              }}
-              className="bg-red-400 self-end"
-              disabled={isLiking}
-            >
-              {isLiking ? (
-                <Loader2 className=" animate-spin " />
-              ) : (
-                <Heart className={`${liked ? 'fill-white' : ''}`} />
-              )}
-            </Button>
-          )}
-        </div>
-      </section>
-
-      <section className={`${isDashboard ? 'p-3' : 'sm:px-24 px-3'}`}>
+      <section className={`  ${isDashboard ? 'p-3' : 'sm:px-24 px-3'}`}>
         <MarkDownComponent blog={blog?.blog} />
       </section>
 
